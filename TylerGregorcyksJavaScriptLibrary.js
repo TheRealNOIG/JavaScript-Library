@@ -157,7 +157,7 @@ function radiansToDegrees(x) {
 
 //--------------------Engine--------------------\\
 
-var Engine = function(canvas, FPS) {
+var Engine = function(canvas, FPS, color) {
     this.canvas = canvas;
     this.contex = this.canvas.getContext("2d");
     this.FPS = 1000 / FPS;
@@ -168,6 +168,10 @@ var Engine = function(canvas, FPS) {
         clicked: false,
         down: false
     };
+    if(color != null)
+    {
+        this.color = color;
+    }
     this.setupEventListener();
 };
 
@@ -207,13 +211,21 @@ Engine.prototype.setupEventListener = function()
 Engine.prototype.update = function()
 {
     _.each(this.gameObjects, function(obj) {
-        obj.update(this.contex);
+        obj.update(this.canvas);
     }, this);
 };
 
 Engine.prototype.draw = function()
 {
-    this.contex.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    if(this.color == undefined)
+    {
+        this.contex.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+    else
+    {
+        this.contex.fillStyle = this.color;
+        this.contex.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
     _.each(this.gameObjects, function(obj) {
         obj.draw(this.contex);
     }, this);
