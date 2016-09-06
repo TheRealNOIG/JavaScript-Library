@@ -48,17 +48,23 @@ Vector2f.prototype.sub = function (other)
 
 Vector2f.multiple = function(a, b)
 {
-    return new Vector2f(a.x * b.x, a.y * b.y);
-};
-Vector2f.prototype.multiple = function(other)
-{
-    this.x = this.x * other.x;
-    this.y = this.y * other.y;
-};
-Vector2f.prototype.multiple = function(amount)
-{
-    this.x = this.x * amount.x;
-    this.y = this.y * amount.y;
+    if(b != null)
+    {
+        return new Vector2f(a.x * b.x, a.y * b.y);
+    }
+    else
+    {
+        if(a instanceof Vector2f)
+        {
+            this.x = this.x * other.x;
+            this.y = this.y * other.y;
+        }
+        else
+        {
+            this.x = this.x * amount;
+            this.y = this.y * amount;
+        }
+    }
 };
 
 Vector2f.divide = function (a, b)
