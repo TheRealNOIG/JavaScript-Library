@@ -13,34 +13,37 @@ var Vector2f = function (x, y)
     this.y = y;
 };
 
-Vector2f.add = function (a, b)
+Vector2f.prototype.add = function (other, b)
 {
-    return new Vector2f(a.x + b.x, a.y + b.y);
-};
-Vector2f.prototype.add = function (other)
-{
-    this.x = this.x + other.x;
-    this.y =  this.y + other.y;
-};
-Vector2f.prototype.add = function (amount)
-{
-    this.x = this.x + amount;
-    this.y = this.y + amount;
+    if(b != null)
+    {
+        return new Vector2f(other.x + b.x, other.y + b.y);
+    }
+    else
+    {
+        if(other instanceof Vector2f)
+        {
+            this.x += other.x || 0;
+            this.y += other.y || 0;
+        } else
+        {
+            this.x += other || 0;
+            this.y += other || 0;
+        }
+    }
 };
 
-Vector2f.sub = function (a, b)
-{
-    return new Vector2f(a.x - b.x, a.y - b.y);
-};
 Vector2f.prototype.sub = function (other)
 {
-    this.x = this.x - other.x;
-    this.y = this.y - other.y;
-};
-Vector2f.prototype.sub = function (amount)
-{
-    this.x = this.x - amount.x;
-    this.y = this.y - amount.y;
+    if(other instanceof Vector2f)
+    {
+        this.x -= other.x;
+        this.y -= other.y;
+    } else
+    {
+        this.x -= other;
+        this.y -= other;
+    }
 };
 
 Vector2f.multiple = function(a, b)
@@ -138,9 +141,16 @@ Vector2f.prototype.heading = function()
     return h;
 };
 
-function createVector2f()
+function createVector2f(x, y)
 {
-    return new Vector2f(0, 0);
+    if(x != null && y != null)
+    {
+        return new Vector2f(x, y);
+    }
+    else
+    {
+        return new Vector2f(0, 0);
+    }
 }
 
 function radiansToDegrees(x) {
