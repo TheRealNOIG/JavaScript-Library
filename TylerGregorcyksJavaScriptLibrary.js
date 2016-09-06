@@ -105,31 +105,20 @@ Vector2f.prototype.limit = function (max)
             this.y = -max;
     }
 };
-Vector2f.prototype.limit = function (max)
-{
-    if(this.x < max.x || this.x > -max.x)
-    {
-        if(this.x < 0)
-            this.x = max.x;
-        else
-            this.x = -max.x;
-    }
-    if(this.y < max.y || this.y > -max.y)
-    {
-        if(this.y < 0)
-            this.y = max.y;
-        else
-            this.y = -max.y;
-    }
-};
 
 Vector2f.distance = function(a, b)
 {
-    return new Vector2f(a.x - b.x, a.y - b.y);
-};
-Vector2f.prototype.distance = function(other)
-{
-    return new Vector2f(this.x - other.x, this.y - other.y);
+    if(b != null)
+    {
+        return new Vector2f(a.x - b.x, a.y - b.y);
+    }
+    else
+    {
+        if(a instanceof Vector2f)
+        {
+            return new Vector2f(this.x - a.x, this.y - a.y);
+        }
+    }
 };
 
 Vector2f.prototype.magnitude = function()
