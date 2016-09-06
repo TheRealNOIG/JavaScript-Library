@@ -56,30 +56,36 @@ Vector2f.multiple = function(a, b)
     {
         if(a instanceof Vector2f)
         {
-            this.x = this.x * other.x;
-            this.y = this.y * other.y;
+            this.x = this.x * a.x;
+            this.y = this.y * a.y;
         }
         else
         {
-            this.x = this.x * amount;
-            this.y = this.y * amount;
+            this.x = this.x * a;
+            this.y = this.y * a;
         }
     }
 };
 
 Vector2f.divide = function (a, b)
 {
-    return new Vector2f(a.x / b.x, a.y / b.y);
-};
-Vector2f.prototype.divide = function (other)
-{
-    this.x = this.x / other.x;
-    this.y = this.y / other.y;
-};
-Vector2f.prototype.divide = function(amount)
-{
-    this.x = this.x / amount.x;
-    this.y = this.y / amount.y;
+    if(b != null)
+    {
+        return new Vector2f(a.x / b.x, a.y / b.y);
+    }
+    else
+    {
+        if(a instanceof Vector2f)
+        {
+            this.x = this.x / a.x;
+            this.y = this.y / a.y;
+        }
+        else
+        {
+            this.x = this.x / a;
+            this.y = this.y / a;
+        }
+    }
 };
 
 Vector2f.prototype.limit = function (max)
