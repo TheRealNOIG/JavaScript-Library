@@ -46,7 +46,7 @@ Vector2f.prototype.sub = function (other)
     }
 };
 
-Vector2f.multiple = function(a, b)
+Vector2f.prototype.multiple = function(a, b)
 {
     if(b != null)
     {
@@ -67,7 +67,7 @@ Vector2f.multiple = function(a, b)
     }
 };
 
-Vector2f.divide = function (a, b)
+Vector2f.prototype.divide = function (a, b)
 {
     if(b != null)
     {
@@ -88,25 +88,39 @@ Vector2f.divide = function (a, b)
     }
 };
 
+Vector2f.prototype.set = function(other)
+{
+    if(other instanceof Vector2f)
+    {
+        this.x = other.x;
+        this.y = other.y;
+    }
+    else
+    {
+        this.x = other;
+        this.y = other;
+    }
+};
+
 Vector2f.prototype.limit = function (max)
 {
-    if(this.x < max || this.x > -max)
+    if(this.x > max || this.x < -max)
     {
-        if(this.x < 0)
+        if(this.x > 0)
             this.x = max;
         else
             this.x = -max;
     }
-    if(this.y < max || this.y > -max)
+    if(this.y > max || this.y < -max)
     {
-        if(this.y < 0)
+        if(this.y > 0)
             this.y = max;
         else
             this.y = -max;
     }
 };
 
-Vector2f.distance = function(a, b)
+Vector2f.prototype.distance = function(a, b)
 {
     if(b != null)
     {
